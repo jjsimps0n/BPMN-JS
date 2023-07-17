@@ -1,3 +1,22 @@
 <div id="canvas"></div>
 <div id="properties"></div>
 <div id="palette"></div>
+<div class="io-import-export">
+    <ul class="io-import io-control io-control-list io-horizontal">
+        <li>
+            <button (click)="onImport()" title="Open BPMN diagram from local file system">
+                <fa-icon [icon]="faIconsService.fas.faFile" size="lg"></fa-icon>
+              </button>
+        </li>
+        <li>
+            <button (click)="onSave()" title="Save BPMN diagram to your local computer">
+                <fa-icon [icon]="faIconsService.fas.faSave" size="lg"></fa-icon>
+              </button>
+        </li>
+        <li>
+            <button (click)="onClear()" title="Clear existing BPMN diagram">
+                <fa-icon [icon]="faIconsService.fas.faRedo" size="lg"></fa-icon>
+              </button>
+        </li>
+    </ul>
+</div>

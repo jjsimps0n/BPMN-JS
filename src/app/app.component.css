@@ -18,4 +18,50 @@
     bottom: 0;
   }
   
+  /** widgets **/
+
+  .io-control {
+    background: #FAFAFA;
+    border-radius: 2px;
+    border: solid 1px #E0E0E0;
+    padding: 5px;
+  }
+  
+  .io-control .vr {
+    height: 15px;
+    display: inline-block;
+    border-right: solid 1px #DDD;
+  }
+  
+  .io-control hr {
+    border: none;
+    border-top: solid 1px #DDD;
+    width: 15px;
+  }
+  
+  .io-control-list .vr {
+    margin-right: 0;
+  }
+  
+  .io-horizontal, .io-horizontal li{
+      display: inline-block;
+      margin: 10px;
+    }
+  
+  .io-import-export {
+    position: fixed;
+    left: 10px;
+  }
+  
+  .io-import-export {
+    bottom: 10px;
+  }
+  
+  .io-import {
+    margin-right: 10px
+  }
+  
+  .io-import-export .inactive {
+    opacity: 0.3;
+  }
   

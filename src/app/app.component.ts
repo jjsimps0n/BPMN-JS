@@ -74,4 +74,16 @@ export class AppComponent implements OnInit {
     xhr.setRequestHeader('Content-Type', 'application/xml');
     xhr.send();
   }
+
+  onImport () {
+    console.log("BPMPN imported succsefully")
+  };
+
+  onSave () {
+    console.log("BPMPN saved to your PC")
+  };
+
+  onClear () {
+    console.log("BPMPN diagram cleared!")
+  };
 }
