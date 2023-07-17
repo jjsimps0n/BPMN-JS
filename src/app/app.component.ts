@@ -2,28 +2,21 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 //@ts-ignore
-import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
+import {BpmnPropertiesPanelModule, BpmnPropertiesProviderModule} from 'bpmn-js-properties-panel';
 import camundaModdleExtension from './camunda-moddle-extension';
 import bpmnPaletteModule from 'bpmn-js/lib/features/palette';
 
-
-
 // CUSTOM PARAMETERS
 
-// INPUT 
+// INPUT
 //@ts-ignore
 import customPropertiesProvider from './providers/js-propertie-provider/custom-property-provider';
 import custom from './providers/js-propertie-provider/descriptors/custom';
 
-
 @Component({
   selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
-  template: `
-    <div id="canvas"></div>
-    <div id="properties"></div>
-    <div id="palette"></div>
-  `,
+  templateUrl: './app.component.html',
   styleUrls: [
     './app.component.css',
     '../../node_modules/bpmn-js/dist/assets/bpmn-js.css',
@@ -33,25 +26,25 @@ import custom from './providers/js-propertie-provider/descriptors/custom';
     '../../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css',
     '../../node_modules/bpmn-js-properties-panel/dist/assets/element-templates.css',
     '../../node_modules/bpmn-js-properties-panel/dist/assets/properties-panel.css',
-  ]
+  ],
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
     const viewer = new BpmnModeler({
       container: '#canvas',
       propertiesPanel: {
-        parent: '#properties'
+        parent: '#properties',
       },
       additionalModules: [
         BpmnPropertiesPanelModule,
         // BpmnPropertiesProviderModule,
         customPropertiesProvider,
-        bpmnPaletteModule
+        bpmnPaletteModule,
       ],
       moddleExtensions: {
         camunda: camundaModdleExtension,
         custom: custom,
-      }
+      },
     });
 
     // const customPropertiesProvider = new CustomPropertiesProvider(viewer);
@@ -68,7 +61,7 @@ export class AppComponent implements OnInit {
           } else {
             console.log('BPMN diagram imported successfully.');
 
-            const propertiesPanel:any = viewer.get('propertiesPanel');
+            const propertiesPanel: any = viewer.get('propertiesPanel');
             // const customProvider = new CustomPropertiesProvider(viewer);
             // propertiesPanel.registerProvider(customProvider);
             propertiesPanel.attachTo('#properties');
