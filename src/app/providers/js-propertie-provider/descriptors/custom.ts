@@ -27,6 +27,21 @@ const custom: ModdleExtension = {
             "isAttr": true,
             "type": "String"
           },
+          {
+            "name": "number",
+            "isAttr": true,
+            "type": "Number"
+          },
+          {
+            "name": "checkbox",
+            "isAttr": true,
+            "type": "Number"
+          },
+          {
+            "name": "textarea",
+            "isAttr": true,
+            "type": "Number"
+          },
         ]
       }
     ]

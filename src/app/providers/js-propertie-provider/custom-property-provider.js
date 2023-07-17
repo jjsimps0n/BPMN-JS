@@ -64,7 +64,7 @@ function createCustomGroup(element, translate) {
   // create a group called "Custom properties".
   const customGroup = {
     id: 'custom',
-    label: translate('Custom properties'),
+    label: translate('Užduoties parametrai'),
     entries: customProperties(element)
   };
 

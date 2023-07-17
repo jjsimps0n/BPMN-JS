@@ -14,11 +14,6 @@ import camundaModdleExtension from './camunda-moddle-extension';
 import customPropertiesProvider from './providers/js-propertie-provider/custom-property-provider';
 import custom from './providers/js-propertie-provider/descriptors/custom';
 
-// SELECT 
-//@ts-ignore
-// import selectProvider from './providers/selectProvider/selectprovider';
-// import selectDescriptor from './providers/selectProvider/descriptors/custom';
-
 
 @Component({
   selector: 'app-root',
@@ -37,14 +32,12 @@ export class AppComponent implements OnInit {
       },
       additionalModules: [
         BpmnPropertiesPanelModule,
-        BpmnPropertiesProviderModule,
+        // BpmnPropertiesProviderModule,
         customPropertiesProvider,
-        // selectProvider
       ],
       moddleExtensions: {
         camunda: camundaModdleExtension,
         custom: custom,
-        // select: selectDescriptor
       }
     });
     // const customPropertiesProvider = new CustomPropertiesProvider(viewer);
