@@ -35,12 +35,27 @@ const custom: ModdleExtension = {
           {
             "name": "checkbox",
             "isAttr": true,
-            "type": "Number"
+            "type": "Bool"
           },
           {
             "name": "textarea",
             "isAttr": true,
-            "type": "Number"
+            "type": "String"
+          },
+          {
+            "name": "list",
+            "isAttr": true,
+            "type": "String"
+          },
+          {
+            "name": "toggle",
+            "isAttr": true,
+            "type": "Bool"
+          },
+          {
+            "name": "feel",
+            "isAttr": true,
+            "type": "String"
           },
         ]
       }

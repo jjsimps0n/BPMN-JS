@@ -3,7 +3,10 @@ import {
     SelectEntry,
     NumberFieldEntry,
     CheckboxEntry,
-    TextAreaEntry
+    TextAreaEntry,
+    ListEntry,
+    ToggleSwitchEntry,
+    FeelEntry
 } from '@bpmn-io/properties-panel';
 
 import { 
@@ -11,7 +14,9 @@ import {
     isSelectEntryEdited,
     isNumberFieldEntryEdited,
     isCheckboxEntryEdited,
-    isTextAreaEntryEdited
+    isTextAreaEntryEdited,
+    isToggleSwitchEntryEdited,
+    isFeelEntryEdited
 } from '@bpmn-io/properties-panel';
 // import { SelectEntry } from 'bpmn-js-properties-panel/lib/factory';
 import { useService } from 'bpmn-js-properties-panel';
@@ -48,6 +53,24 @@ export default function(element) {
       element,
       component: TextAreaComponent,
       isEdited: isTextAreaEntryEdited
+    },
+    {
+      id: 'list',
+      element,
+      component: ListEntryComponent,
+      isEdited: isTextAreaEntryEdited
+    },
+    {
+      id: 'toggle',
+      element,
+      component: ToggleSwitchEntryComponent,
+      isEdited: isToggleSwitchEntryEdited
+    },
+    {
+      id: 'feel',
+      element,
+      component: FeelEntryComponent,
+      isEdited: isFeelEntryEdited
     },
   ];
 }
@@ -198,5 +221,132 @@ function TextAreaComponent(props) {
       getValue,
       setValue,
       debounce,
+    });
+}
+
+function ListEntryComponent(props) {
+    const { element, id } = props;
+  
+    const modeling = useService('modeling');
+    const translate = useService('translate');
+    const debounce = useService('debounceInput');
+    const label = translate('List parametras [LT]');
+  
+    const getValue = () => {
+      return element.businessObject.list || '';
+    }
+  
+    const setValue = value => {
+      return modeling.updateProperties(element, {
+        list: value
+      });
+    }
+  
+    const options = [
+      { value: 'option1', label: 'Option 1' },
+      { value: 'option2', label: 'Option 2' },
+      { value: 'option3', label: 'Option 3' }
+    ];
+  
+    const onAdd = (newOption) => {
+      // Perform any necessary logic when an option is added
+      console.log('Option added:', newOption);
+      
+      // For example, you can update the model or perform some action
+      // based on the new option value
+      if (newOption) {
+        // Add the logic to update the model or perform an action here
+        // ...
+      }
+    };
+  
+    return new ListEntry({
+      id,
+      label,
+      element,
+      getValue,
+      setValue,
+      debounce,
+      options,
+      onAdd
+    });
+}
+
+function ToggleSwitchEntryComponent(props) {
+    const { element, id } = props;
+  
+    const modeling = useService('modeling');
+    const translate = useService('translate');
+    const debounce = useService('debounceInput');
+    const label = translate('Toggle Switch parametras [LT]');
+  
+    const getValue = () => {
+      return element.businessObject.toggle || false;
+    };
+  
+    const setValue = value => {
+      return modeling.updateProperties(element, {
+        toggle: value
+      });
+    };
+  
+    const onToggle = (newValue) => {
+      // Perform any necessary logic when the toggle switch is toggled
+      console.log('Toggle Switch toggled:', newValue);
+  
+      // For example, you can update the model or perform some action
+      // based on the new toggle switch value
+      if (newValue) {
+        // Add the logic to update the model or perform an action here
+        // ...
+      }
+    };
+  
+    return new ToggleSwitchEntry({
+      id,
+      label,
+      element,
+      getValue,
+      setValue,
+      debounce,
+      onToggle
+    });
+}
+
+function FeelEntryComponent(props) {
+    const { element, id } = props;
+  
+    const modeling = useService('modeling');
+    const translate = useService('translate');
+    const debounce = useService('debounceInput');
+    const label = translate('FEEL parametras [LT]');
+  
+    const getValue = () => {
+      return element.businessObject.feel || '';
+    };
+  
+    const setValue = value => {
+      return modeling.updateProperties(element, {
+        feel: value
+      });
+    };
+  
+    const onInput = (newValue) => {
+      // Perform any necessary logic when the input value changes
+      console.log('FEEL Entry value changed:', newValue);
+  
+      // For example, you can update the model or perform some action
+      // based on the new input value
+      // ...
+    };
+  
+    return new FeelEntry({
+      id,
+      label,
+      element,
+      getValue,
+      setValue,
+      debounce,
+      onInput
     });
 }
