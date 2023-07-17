@@ -1,18 +1,18 @@
 /* Set the properties panel width and position */
 #properties {
     position: fixed;
-    left: 0;
+    right: 0;
     top: 0;
     bottom: 0;
-    width: 300px; /* Adjust the width as needed */
-    background-color: #f0f0f0; /* Adjust the background color as needed */
+    width: 300px; 
+    background-color: #f0f0f0;
     z-index: 9999;
   }
   
   /* Set the viewer to fill the remaining space */
   #canvas {
     position: fixed;
-    left: 300px; /* Adjust the left offset to match the properties panel width */
+    left: 0; 
     top: 0;
     right: 0;
     bottom: 0;

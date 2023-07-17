@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 //@ts-ignore
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import camundaModdleExtension from './camunda-moddle-extension';
+import bpmnPaletteModule from 'bpmn-js/lib/features/palette';
 
 
 
@@ -17,11 +18,22 @@ import custom from './providers/js-propertie-provider/descriptors/custom';
 
 @Component({
   selector: 'app-root',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div id="canvas"></div>
     <div id="properties"></div>
+    <div id="palette"></div>
   `,
-  styleUrls: ['./app.component.css']
+  styleUrls: [
+    './app.component.css',
+    '../../node_modules/bpmn-js/dist/assets/bpmn-js.css',
+    '../../node_modules/bpmn-js/dist/assets/diagram-js.css',
+    '../../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css',
+    '../../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css',
+    '../../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css',
+    '../../node_modules/bpmn-js-properties-panel/dist/assets/element-templates.css',
+    '../../node_modules/bpmn-js-properties-panel/dist/assets/properties-panel.css',
+  ]
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
@@ -34,12 +46,14 @@ export class AppComponent implements OnInit {
         BpmnPropertiesPanelModule,
         // BpmnPropertiesProviderModule,
         customPropertiesProvider,
+        bpmnPaletteModule
       ],
       moddleExtensions: {
         camunda: camundaModdleExtension,
         custom: custom,
       }
     });
+
     // const customPropertiesProvider = new CustomPropertiesProvider(viewer);
 
     const xmlPath = 'assets/init.bpmn'; // Adjust the path to your XML file
