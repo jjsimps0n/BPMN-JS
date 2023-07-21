@@ -21,7 +21,7 @@ import {
 // import { SelectEntry } from 'bpmn-js-properties-panel/lib/factory';
 import { useService } from 'bpmn-js-properties-panel';
 
-export default function(element) {
+export default function(element, params = false) {
 
   return [
     {
@@ -33,6 +33,7 @@ export default function(element) {
     {
       id: 'select',
       element,
+      params,
       component: SelectComponent,
       isEdited: isSelectEntryEdited
     },
@@ -106,12 +107,10 @@ function InputComponent(props) {
 }
 
 function SelectComponent(props) {
-  const { element, id } = props;
-
+  const { element, id, params } = props;
   const modeling = useService('modeling');
   const translate = useService('translate');
   const label = translate('Select parametras [LT]');
-
   const getValue = () => {
     return element.businessObject.select || '';
   }
@@ -123,11 +122,7 @@ function SelectComponent(props) {
   }
 
   const getOptions = () => {
-    return [
-      { value: 'option1', label: 'Option 1' },
-      { value: 'option2', label: 'Option 2' },
-      { value: 'option3', label: 'Option 3' },
-    ];
+    return params;
   };
 
   return new SelectEntry({

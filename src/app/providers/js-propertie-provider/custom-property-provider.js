@@ -15,9 +15,10 @@ const LOW_PRIORITY = 500;
  * @param {PropertiesPanel} propertiesPanel
  * @param {Function} translate
  */
-function CustomPropertiesProvider(propertiesPanel, translate) {
+function CustomPropertiesProvider(propertiesPanel, translate, param = false) {
 
   // API ////////
+  const paramValue = param; // Access the parameter value here
 
   /**
    * Return the groups provided for the given element.
@@ -40,12 +41,14 @@ function CustomPropertiesProvider(propertiesPanel, translate) {
 
       // Add the "magic" group
       if(is(element, 'bpmn:Task')) {
-        groups.push(createCustomGroup(element, translate));
+        groups.push(createCustomGroup(element, translate, paramValue));
       }
 
       return groups;
     }
   };
+
+  
 
 
   // registration ////////
@@ -53,19 +56,20 @@ function CustomPropertiesProvider(propertiesPanel, translate) {
   // Register our custom magic properties provider.
   // Use a lower priority to ensure it is loaded after
   // the basic BPMN properties.
+  console.log(paramValue);
   propertiesPanel.registerProvider(LOW_PRIORITY, this);
 }
 
-CustomPropertiesProvider.$inject = [ 'propertiesPanel', 'translate' ];
+CustomPropertiesProvider.$inject = [ 'propertiesPanel', 'translate', 'param' ];
 
 // Create the custom magic group
-function createCustomGroup(element, translate) {
-
+function createCustomGroup(element, translate, params = false) {
+    // console.log(customData);
   // create a group called "Custom properties".
   const customGroup = {
     id: 'custom',
     label: translate('Užduoties parametrai'),
-    entries: customProperties(element)
+    entries: customProperties(element, params)
   };
 
   return customGroup;
@@ -73,6 +77,7 @@ function createCustomGroup(element, translate) {
 
 
 export default {
-  __init__: [ 'customPropertiesProvider' ],
-  customPropertiesProvider: [ 'type', CustomPropertiesProvider ]
+  __init__: [ 'customPropertiesProvider', 'param' ],
+  customPropertiesProvider: [ 'type', CustomPropertiesProvider ],
+  param: ['value', false],
 };

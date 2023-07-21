@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 //@ts-ignore
-import {BpmnPropertiesPanelModule, BpmnPropertiesProviderModule} from 'bpmn-js-properties-panel';
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import camundaModdleExtension from './camunda-moddle-extension';
 import bpmnPaletteModule from 'bpmn-js/lib/features/palette';
 
@@ -30,6 +30,16 @@ import custom from './providers/js-propertie-provider/descriptors/custom';
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
+
+    customPropertiesProvider.param = [
+      'value',
+      [
+        { value: 'option1', label: 'Lalala123' },
+        { value: 'option2', label: 'Option 2' },
+        { value: 'option3', label: 'Option 3' },
+      ] 
+  ];
+
     const viewer = new BpmnModeler({
       container: '#canvas',
       propertiesPanel: {
@@ -47,6 +57,8 @@ export class AppComponent implements OnInit {
       },
     });
 
+    
+    customPropertiesProvider.args = "Labas";
     // const customPropertiesProvider = new CustomPropertiesProvider(viewer);
 
     const xmlPath = 'assets/init.bpmn'; // Adjust the path to your XML file
@@ -62,8 +74,6 @@ export class AppComponent implements OnInit {
             console.log('BPMN diagram imported successfully.');
 
             const propertiesPanel: any = viewer.get('propertiesPanel');
-            // const customProvider = new CustomPropertiesProvider(viewer);
-            // propertiesPanel.registerProvider(customProvider);
             propertiesPanel.attachTo('#properties');
           }
         });
@@ -75,15 +85,15 @@ export class AppComponent implements OnInit {
     xhr.send();
   }
 
-  onImport () {
+  onImport() {
     console.log("BPMPN imported succsefully")
   };
 
-  onSave () {
+  onSave() {
     console.log("BPMPN saved to your PC")
   };
 
-  onClear () {
+  onClear() {
     console.log("BPMPN diagram cleared!")
   };
 }
