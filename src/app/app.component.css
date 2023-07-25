@@ -93,11 +93,3 @@
     visibility: visible;
     opacity: 1;
   }
-
-  .bio-properties-panel-remove-entry {
-    color: green;
-  }
-
-  div[data-entry-id="formProperties1"] .bio-properties-panel-collapsible-entry-header .bio-properties-panel-remove-entry {
-    background-color: red;
-  }
