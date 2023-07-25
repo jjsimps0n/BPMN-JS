@@ -13,6 +13,10 @@ import bpmnPaletteModule from 'bpmn-js/lib/features/palette';
 import customPropertiesProvider from './providers/js-propertie-provider/custom-property-provider';
 import custom from './providers/js-propertie-provider/descriptors/custom';
 
+//@ts-ignore
+import formsPropertiesProvider from './providers/sequenceFormsProperties/custom-property-provider';
+import formsProviderCustoms from './providers/sequenceFormsProperties/descriptors/custom';
+
 @Component({
   selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
@@ -30,15 +34,16 @@ import custom from './providers/js-propertie-provider/descriptors/custom';
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
-
-    customPropertiesProvider.param = [
+    formsPropertiesProvider.param = [
       'value',
       [
-        { value: 'option1', label: 'Lalala123' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' },
-      ] 
-  ];
+        [
+          { value: 'option1', label: 'Pasirinkimas 1' },
+          { value: 'option2', label: 'Option 2' },
+          { value: 'option3', label: 'Option 3' },
+        ]
+      ]
+    ];
 
     const viewer = new BpmnModeler({
       container: '#canvas',
@@ -48,18 +53,17 @@ export class AppComponent implements OnInit {
       additionalModules: [
         BpmnPropertiesPanelModule,
         // BpmnPropertiesProviderModule,
-        customPropertiesProvider,
+        // customPropertiesProvider,
+        formsPropertiesProvider,
         bpmnPaletteModule,
       ],
       moddleExtensions: {
         camunda: camundaModdleExtension,
-        custom: custom,
+        // custom: custom,
+        formsProviderCustoms: formsProviderCustoms
       },
     });
 
-    
-    customPropertiesProvider.args = "Labas";
-    // const customPropertiesProvider = new CustomPropertiesProvider(viewer);
 
     const xmlPath = 'assets/init.bpmn'; // Adjust the path to your XML file
 
@@ -96,4 +100,24 @@ export class AppComponent implements OnInit {
   onClear() {
     console.log("BPMPN diagram cleared!")
   };
+
+  formCode: string = '';
+  public setFormOptions(value: string) {
+    this.formCode = value;
+  }
+
+  public getFormOptions(value: string) {
+    if (value == 'option1') {
+      return [
+        { value: 'option1', label: 'Pasirinkimas 1' },
+        { value: 'option2', label: 'sendEmail()' },
+      ]
+    }
+    if (value == 'option2') {
+      return [
+        { value: 'option2', label: 'Pasirinkimas 2' },
+      ]
+    }
+    return [];
+  }
 }

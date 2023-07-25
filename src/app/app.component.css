@@ -83,8 +83,21 @@
     opacity: 0;
     transition: visibility 0s, opacity 0.2s;
   }
+
+  .djs-palette .entry::after {
+    
+  }
+ 
   
   .djs-palette .entry:hover::after {
     visibility: visible;
     opacity: 1;
+  }
+
+  .bio-properties-panel-remove-entry {
+    color: green;
+  }
+
+  div[data-entry-id="formProperties1"] .bio-properties-panel-collapsible-entry-header .bio-properties-panel-remove-entry {
+    background-color: red;
   }

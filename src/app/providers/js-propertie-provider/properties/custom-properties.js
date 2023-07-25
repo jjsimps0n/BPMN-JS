@@ -237,12 +237,6 @@ function ListEntryComponent(props) {
       });
     }
   
-    const options = [
-      { value: 'option1', label: 'Option 1' },
-      { value: 'option2', label: 'Option 2' },
-      { value: 'option3', label: 'Option 3' }
-    ];
-  
     const onAdd = (newOption) => {
       // Perform any necessary logic when an option is added
       console.log('Option added:', newOption);
@@ -262,7 +256,6 @@ function ListEntryComponent(props) {
       getValue,
       setValue,
       debounce,
-      options,
       onAdd
     });
 }
